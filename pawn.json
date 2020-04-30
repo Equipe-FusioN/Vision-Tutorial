@@ -1,0 +1,72 @@
+{
+	"user": "Chainksain",
+	"repo": "FusioN-Tutorial",
+	"entry": "gamemodes/tutorial.pwn",
+	"output": "gamemodes/tutorial.amx",
+	"dependencies": [
+		"sampctl/pawn-stdlib",
+		"sampctl/samp-stdlib",
+		"pawn-lang/sa-mp-fixes",
+		"ziggi/samp-plugin-timerfix",
+		"pBlueG/SA-MP-MySQL",
+		"maddinat0r/sscanf",
+		"Southclaws/zcmd",
+		"Zeex/samp-plugin-crashdetect"
+	],
+	"local": true,
+	"builds": [
+		{
+			"name": "",
+			"version": "3.10.10",
+			"args": [
+				"-;+",
+				"-(+",
+				"-d3",
+				"-Z+"
+			],
+			"includes": [
+				"./includes/"
+			]
+		}
+	],
+	"runtime": {
+		"version": "0.3.7",
+		"mode": "server",
+		"echo": "Executing Server Config...",
+		"rcon_password": "=$SeYx104@=",
+		"port": 7777,
+		"hostname": "FusioN SAMP Tutoriais",
+		"maxplayers": 50,
+		"language": "PT/BR",
+		"mapname": "San Andreas",
+		"weburl": "https://fusionteam.dev",
+		"gamemodetext": "Unknown",
+		"announce": false,
+		"lanmode": false,
+		"query": true,
+		"rcon": false,
+		"logqueries": false,
+		"sleep": 5,
+		"maxnpc": 0,
+		"stream_rate": 1000,
+		"stream_distance": 300,
+		"onfoot_rate": 40,
+		"incar_rate": 40,
+		"weapon_rate": 40,
+		"chatlogging": true,
+		"timestamp": true,
+		"logtimeformat": "%H:%M:%S",
+		"messageholelimit": 3000,
+		"messageslimit": 500,
+		"ackslimit": 3000,
+		"playertimeout": 10000,
+		"minconnectiontime": 0,
+		"lagcompmode": 1,
+		"connseedtime": 300000,
+		"db_logging": false,
+		"db_log_queries": false,
+		"conncookies": true,
+		"cookielogging": false,
+		"output": true
+	}
+}
