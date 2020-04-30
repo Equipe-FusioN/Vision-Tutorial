@@ -5,6 +5,7 @@
 #include <sscanf2>
 #include <zcmd>
 #include <DOF2>
+#include <YSI_Data\y_iterate>
 
 #define function%0(%1) forward %0(%1); public %0(%1)
 
@@ -295,7 +296,20 @@ public OnVehicleDeath(vehicleid, killerid)
 
 public OnPlayerText(playerid, text[])
 {
-	return 1;
+	new Float:talkpos[3];
+	GetPlayerPos(playerid, talkpos[0], talkpos[1], talkpos[2]);
+	foreach(new i : Player)
+	{
+		if(IsPlayerInRangeOfPoint(i, 20, talkpos[0], talkpos[1], talkpos[2]))
+		{
+			new string[128];
+			format(string,sizeof(string), "%s(%d): %s", GetPlayerNameEx(playerid), playerid, text);
+			SendClientMessage(i, -1, string);
+			return 1;
+		}
+	}
+
+	return 0;
 }
 
 public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)

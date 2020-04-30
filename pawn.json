@@ -1,6 +1,7 @@
 {
 	"user": "Chainksain",
 	"repo": "FusioN-Tutorial",
+	"tag": "0.1.1",
 	"entry": "gamemodes/tutorial.pwn",
 	"output": "gamemodes/tutorial.amx",
 	"dependencies": [
@@ -11,7 +12,8 @@
 		"pBlueG/SA-MP-MySQL",
 		"maddinat0r/sscanf",
 		"Southclaws/zcmd",
-		"Zeex/samp-plugin-crashdetect"
+		"Zeex/samp-plugin-crashdetect",
+		"pawn-lang/YSI-Includes"
 	],
 	"local": true,
 	"builds": [
