@@ -132,7 +132,7 @@ stock LoadPlayerWeaponData(playerid)
     orm_addvar_int(PlayerData[playerid][ormid], WeaponData[playerid][WEAPONSLOT_SHOTGUN][ammo], "shotgun_ammo");
  
     orm_addvar_int(PlayerData[playerid][ormid], WeaponData[playerid][WEAPONSLOT_MACHINEGUN][weaponid], "machinegun");
-    orm_addvar_int(PlayerData[playerid][ormid], WeaponData[playerid][WEAPONSLOT_MACHINEGUN][ammo], "machine_ammo");
+    orm_addvar_int(PlayerData[playerid][ormid], WeaponData[playerid][WEAPONSLOT_MACHINEGUN][ammo], "machinegun_ammo");
  
     orm_addvar_int(PlayerData[playerid][ormid], WeaponData[playerid][WEAPONSLOT_FUZIL][weaponid], "fuzil");
     orm_addvar_int(PlayerData[playerid][ormid], WeaponData[playerid][WEAPONSLOT_FUZIL][ammo], "fuzil_ammo");
