@@ -36,7 +36,7 @@ hook OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				SHA256_PassHash(inputtext, PlayerData[playerid][pSalt], hash, MAX_PASS_LEN);
 				if(strlen(inputtext) < 1 || strcmp(PlayerData[playerid][senha], hash))
 				{
-					SendClientMessage(playerid, -1, "ERRO: Senha incorreta!");
+					SendClientMessage(playerid, COR_VERMELHO, "ERRO: Senha incorreta!");
 					ShowPlayerDialog(playerid, DIALOG_LOGIN, DIALOG_STYLE_PASSWORD, "Login", "Digite sua senha para logar:", "Logar", "Sair");
 				}
 				else
@@ -60,7 +60,7 @@ hook OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			{
 				if(strlen(inputtext) < 1 || strlen(inputtext) > 16)
 				{
-					SendClientMessage(playerid, -1, "ERRO: Sua senha deve conter entre 1 e 16 caracteres!");
+					SendClientMessage(playerid, COR_VERMELHO, "ERRO: Sua senha deve conter entre 1 e 16 caracteres!");
 					ShowPlayerDialog(playerid, DIALOG_REGISTRO, DIALOG_STYLE_PASSWORD, "Registro", "Entre com uma senha para se registrar:", "Registrar", "Sair");
 				}
 				else

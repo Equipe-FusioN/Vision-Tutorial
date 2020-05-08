@@ -10,10 +10,12 @@
 #include <YSI_Coding\y_hooks>
 
 // CABEÇALHOS
+#include <cores>
 #include <tutorial>
 #include <dbinfo>
 #include <playerinfo>
 #include <weaponinfo>
+#include <adminfo>
 
 // MODULOS
 #include "../modulos/core/util.pwn"
@@ -24,12 +26,14 @@
 #include "../modulos/player/player.pwn"
 #include "../modulos/player/comandos.pwn"
 
+#include "../modulos/admin/comandos.pwn"
+
 // -----------------------------------------------------------------
 
 main()
 {
 	print("\n----------------------------------");
-	print(" Blank Gamemode by your name here");
+	print(" Tutorial Series by FusioN Team ");
 	print("----------------------------------\n");
 }
 
@@ -37,7 +41,7 @@ main()
 
 public OnGameModeInit()
 {
-	SetGameModeText("Blank Script");
+	SetGameModeText("FsN Tutos");
 	LoadMap("maps/favela_objects.txt");
 	DataBaseInit();
 	return 1;
