@@ -21,7 +21,7 @@ hook OnPlayerDisconnect(playerid, reason)
 		};
 		new string[64];
 		format(string, sizeof(string), "%s foi desconectado (%s)", GetPlayerNameEx(playerid), rsnstr[reason]);
-		SendClientMessageToAll(-1, string);
+		SendClientMessageToAll(COR_CINZA, string);
 	}
 
 	orm_destroy(PlayerData[playerid][ormid]);
@@ -81,8 +81,9 @@ stock LoadPlayerData(playerid)
 
 stock SavePlayerData(playerid)
 {
-    PlayerData[playerid][armor] = GetPlayerArmourEx(playerid);
-    PlayerData[playerid][health] = GetPlayerHealthEx(playerid);
+    if(ModoAdmin[playerid] == false)
+		GetPlayerHealth(playerid, PlayerData[playerid][health]);
+	GetPlayerArmour(playerid, PlayerData[playerid][armor]);
     PlayerData[playerid][money] = GetPlayerMoney(playerid);
     PlayerData[playerid][skin] = GetPlayerSkin(playerid);
     PlayerData[playerid][interior] = GetPlayerInterior(playerid);
