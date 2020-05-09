@@ -46,7 +46,7 @@ CMD:admins(playerid, params[])
                 new adminid, nomeadm[MAX_PLAYER_NAME], modoadm[16], admlvlname[16];
                 cache_get_value_name(i, "nome", nomeadm);
                 sscanf(nomeadm, "u", adminid);
-                if(IsPlayerConnected(adminid)) 
+                if(IsPlayerConnected(adminid))
                 {
                     format(nomeadm, sizeof(nomeadm), "%s", GetPlayerNameEx(adminid));
                     if(ModoAdmin[adminid] == true)
