@@ -27,6 +27,7 @@
 #include "../modulos/player/comandos.pwn"
 
 #include "../modulos/admin/comandos.pwn"
+#include "../modulos/admin/admin.pwn"
 
 // -----------------------------------------------------------------
 

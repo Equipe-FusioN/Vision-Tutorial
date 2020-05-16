@@ -45,8 +45,10 @@ CMD:admins(playerid, params[])
             {
                 new adminid, nomeadm[MAX_PLAYER_NAME], modoadm[16], admlvlname[16];
                 cache_get_value_name(i, "nome", nomeadm);
-                sscanf(nomeadm, "u", adminid);
-                if(IsPlayerConnected(adminid))
+                new aux[MAX_PLAYER_NAME];
+                format(aux, sizeof(aux), "%s", nomeadm);
+                unformat(aux, "u", adminid);
+                if(adminid != INVALID_PLAYER_ID && PlayerData[adminid][logado] == true)
                 {
                     format(nomeadm, sizeof(nomeadm), "%s", GetPlayerNameEx(adminid));
                     if(ModoAdmin[adminid] == true)
@@ -54,7 +56,7 @@ CMD:admins(playerid, params[])
                     else format(modoadm,sizeof(modoadm), "%sJogando",EMBED_AMARELO);
                     format(admlvlname, sizeof(admlvlname), "%s", GetAdminLevelName(PlayerData[adminid][admin]));
                     
-                    format(string, sizeof(string), "%s\n%s\t%s\t%s", nomeadm, admlvlname, modoadm);
+                    format(string, sizeof(string), "%s\n%s\t%s\t%s", string, nomeadm, admlvlname, modoadm);
                 }
                 else
                 {
@@ -63,7 +65,7 @@ CMD:admins(playerid, params[])
                     cache_get_value_name_int(i, "admin", admlvl);
                     format(admlvlname, sizeof(admlvlname), "%s", GetAdminLevelName(admlvl));
                     
-                    format(string, sizeof(string), "%s\n%s\t%s\t%s", nomeadm, admlvlname, modoadm);
+                    format(string, sizeof(string), "%s\n%s\t%s\t%s", string, nomeadm, admlvlname, modoadm);
                 }
             }
         }
@@ -71,5 +73,32 @@ CMD:admins(playerid, params[])
     }
     cache_unset_active();
     cache_delete(cache);
+    return 1;
+}
+
+CMD:setaradm(playerid, params[])
+{
+    new string[64];
+    if(PlayerData[playerid][admin] < DEV)
+    {
+        format(string, sizeof(string), "ERRO: Você não é um %s!", GetAdminLevelName(DEV));
+        return SendClientMessage(playerid, COR_VERMELHO, string);
+    }
+    else if(ModoAdmin[playerid] != true)
+            return SendClientMessage(playerid, COR_VERMELHO, "ERRO: Você não está em modo admin!");
+
+    new giveplayerid, admlvl;
+    if(sscanf(params, "ud", giveplayerid, admlvl))
+        return SendClientMessage(playerid, COR_CINZA, "USO: /setaradm [id/nome] [nivel(0~4)]");
+    else if(giveplayerid == INVALID_PLAYER_ID || !IsPlayerConnected(giveplayerid))
+        return SendClientMessage(playerid, COR_VERMELHO, "ERRO: Jogador não está logado!");
+    else if(PlayerData[giveplayerid][logado] != true)
+        return SendClientMessage(playerid, COR_VERMELHO, "ERRO: Jogador não está logado!");
+
+    PlayerData[giveplayerid][admin] = admlvl;
+    orm_update(PlayerData[giveplayerid][ormid]);
+
+    format(string, sizeof(string), "%s %s Alterou o cargo de %s para %s.", GetAdminLevelName(PlayerData[playerid][admin]), GetPlayerNameEx(playerid), GetPlayerNameEx(giveplayerid), GetAdminLevelName(PlayerData[giveplayerid][admin]));    
+    SendClientMessageToAll(COR_ROSA, string);
     return 1;
 }
