@@ -43,7 +43,7 @@ CMD:admins(playerid, params[])
         {
             for(new i; i<row; i++)
             {
-                new adminid, nomeadm[MAX_PLAYER_NAME], modoadm[16], admlvlname[16];
+                new adminid, nomeadm[MAX_PLAYER_NAME], modoadm[MAX_PLAYER_NAME], admlvlname[16];
                 cache_get_value_name(i, "nome", nomeadm);
                 new aux[MAX_PLAYER_NAME];
                 format(aux, sizeof(aux), "%s", nomeadm);
