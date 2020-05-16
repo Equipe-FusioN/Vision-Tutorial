@@ -7,6 +7,7 @@ enum // Niveis de Admin
     DEV
 };
 
+new AdminData[MAX_PLAYERS][MAX_PLAYER_NAME];
 new bool:ModoAdmin[MAX_PLAYERS];
 
 stock GetAdminLevelName(admlvl)
