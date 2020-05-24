@@ -8,7 +8,10 @@ function DataBaseInit()
 		print("[MySQL] Verificando tabelas...");
 
         CheckPlayerTable();
-		print("[MySQL] Tabela 'Players' verificada com sucesso!");
+		print("[MySQL] Tabela 'Player' verificada com sucesso!");
+
+		CheckBanTable();
+		print("[MySQL] Tabela 'Ban' verificada com sucesso!");
 	}
 	else
 	{
@@ -53,4 +56,17 @@ stock CheckPlayerTable()
     mysql_query(DBConn, "ALTER TABLE Player ADD IF NOT EXISTS fuzil_ammo int DEFAULT 0;", false);
     mysql_query(DBConn, "ALTER TABLE Player ADD IF NOT EXISTS rifle int DEFAULT 0;", false);
     mysql_query(DBConn, "ALTER TABLE Player ADD IF NOT EXISTS rifle_ammo int DEFAULT 0;", false);
+}
+
+stock CheckBanTable()
+{
+	mysql_query(DBConn, "CREATE TABLE IF NOT EXISTS Ban (\
+	accid int NOT_NULL, \
+	ip varchar(16) NOT_NULL, \
+	gpci varchar(64) NOT_NULL, \
+	admin_name varchar(25) NOT_NULL, \
+	ban int NOT_NULL, \
+	desban int NOT_NULL, \
+	motivo varchar(255) NOT_NULL, \
+	FOREIGN KEY (accid) REFERENCES Player(id);", false);
 }
