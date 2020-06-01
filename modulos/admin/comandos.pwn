@@ -102,3 +102,41 @@ CMD:setaradm(playerid, params[])
     SendClientMessageToAll(COR_ROSA, string);
     return 1;
 }
+
+CMD:banir(playerid, params[])
+{
+	new string[512];
+    if(PlayerData[playerid][admin] < ADMIN)
+    {
+        format(string, sizeof(string), "ERRO: Você não é um %s!", GetAdminLevelName(ADMIN));
+        return SendClientMessage(playerid, COR_VERMELHO, string);
+    }
+    else if(ModoAdmin[playerid] != true)
+        return SendClientMessage(playerid, COR_VERMELHO, "ERRO: Você não está em modo admin!");
+
+    new giveplayerid, tempo, motivo[64];
+    if(sscanf(params, "uds[64]", giveplayerid, tempo, motivo))
+        return SendClientMessage(playerid, COR_CINZA, "USO: /banir [id/nome] [dias(0=permanente)] [motivo]");
+    else if(giveplayerid == INVALID_PLAYER_ID || PlayerData[giveplayerid][logado] != true)
+        return SendClientMessage(playerid, COR_VERMELHO, "ERRO: Jogador não está logado!");
+
+    new playerip[16], serial[64], bantime, unbantime;
+    GetPlayerIp(giveplayerid, playerip, sizeof(playerip));
+    gpci(giveplayerid, serial, sizeof(serial));
+    bantime = getdate() + gettime();
+    if(tempo < 1) unbantime = 0; // permaban
+    else unbantime = bantime + (tempo*86400); // 86400 = 1 dia
+
+    mysql_format(DBConn, string, sizeof(string), "INSERT INTO Ban \
+        (accid, ip, gpci, admin_name, ban, desban, motivo) \
+        VALUES (%d, %e, %e, %d, %d, %e);",
+        PlayerData[giveplayerid][accid], playerip, serial, GetPlayerNameEx(playerid), bantime, unbantime, motivo);
+    mysql_query(DBConn, string, false);
+
+    if(tempo < 1) format(string, sizeof(string), "%s %s baniu %s permanentemente.", GetAdminLevelName(PlayerData[playerid][admin]), GetPlayerNameEx(playerid), GetPlayerNameEx(giveplayerid));
+    else format(string, sizeof(string), "%s %s baniu %s por %d dia(s).", GetAdminLevelName(PlayerData[playerid][admin]), GetPlayerNameEx(playerid), GetPlayerNameEx(giveplayerid), tempo);
+
+    SendClientMessageToAll(COR_VERMELHO, string);
+    Kick(giveplayerid);
+    return 1;
+}
