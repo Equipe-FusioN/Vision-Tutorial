@@ -9,9 +9,8 @@ function DataBaseInit()
 
         CheckPlayerTable();
 		print("[MySQL] Tabela 'Player' verificada com sucesso!");
-
 		CheckBanTable();
-		print("[MySQL] Tabela 'Ban' verificada com sucesso!");
+		print("[MySQL] Tablea 'Ban' verificada com sucesso!");
 	}
 	else
 	{
@@ -29,7 +28,8 @@ stock CheckPlayerTable()
 		nome varchar(25) NOT NULL,\
 		senha varchar(255) NOT NULL,\
 		admin int DEFAULT 0,\
-		PRIMARY KEY(id));", false);
+		PRIMARY KEY(id)\
+	);", false);
 
     mysql_query(DBConn, "ALTER TABLE Player ADD IF NOT EXISTS health float DEFAULT 100;", false);
     mysql_query(DBConn, "ALTER TABLE Player ADD IF NOT EXISTS armor float DEFAULT 100;", false);
@@ -61,12 +61,16 @@ stock CheckPlayerTable()
 stock CheckBanTable()
 {
 	mysql_query(DBConn, "CREATE TABLE IF NOT EXISTS Ban (\
-	accid int NOT_NULL, \
-	ip varchar(16) NOT_NULL, \
-	gpci varchar(64) NOT_NULL, \
-	admin_name varchar(25) NOT_NULL, \
-	ban int NOT_NULL, \
-	desban int NOT_NULL, \
-	motivo varchar(255) NOT_NULL, \
-	FOREIGN KEY (accid) REFERENCES Player(id);", false);
+		banid int NOT NULL AUTO_INCREMENT,\
+		accid int NOT NULL,\
+		PRIMARY KEY (banid),\
+		FOREIGN KEY (accid) REFERENCES Player(id)\
+	);", false);
+
+	mysql_query(DBConn, "ALTER TABLE Ban ADD IF NOT EXISTS ip varchar(16) NOT NULL;", false);
+	mysql_query(DBConn, "ALTER TABLE Ban ADD IF NOT EXISTS gpci varchar(64) NOT NULL;", false);
+	mysql_query(DBConn, "ALTER TABLE Ban ADD IF NOT EXISTS adm varchar(25) NOT NULL;", false);
+	mysql_query(DBConn, "ALTER TABLE Ban ADD IF NOT EXISTS ban int NOT NULL;", false);
+	mysql_query(DBConn, "ALTER TABLE Ban ADD IF NOT EXISTS desban int NOT NULL;", false);
+	mysql_query(DBConn, "ALTER TABLE Ban ADD IF NOT EXISTS motivo varchar(255) NOT NULL;", false);
 }
