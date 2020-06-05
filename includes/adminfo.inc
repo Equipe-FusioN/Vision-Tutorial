@@ -23,3 +23,10 @@ stock GetAdminLevelName(admlvl)
     }
     return admlabel;
 }
+
+stock SendClientMessageToStaff(const message[])
+{
+    foreach(new playerid : Player)
+        if(PlayerData[playerid][admin] > PLAYER)
+            SendClientMessage(playerid, COR_ROSA, message);
+}

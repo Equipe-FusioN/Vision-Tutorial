@@ -27,6 +27,8 @@ CMD:modoadmin(playerid, params[])
     return 1;
 }
 
+// -----------------------------------------------------------------------------------------
+
 CMD:admins(playerid, params[])
 {
     if(PlayerData[playerid][logado] == false)
@@ -76,6 +78,8 @@ CMD:admins(playerid, params[])
     return 1;
 }
 
+// -----------------------------------------------------------------------------------------
+
 CMD:setaradm(playerid, params[])
 {
     new string[64];
@@ -102,6 +106,8 @@ CMD:setaradm(playerid, params[])
     SendClientMessageToAll(COR_ROSA, string);
     return 1;
 }
+
+// -----------------------------------------------------------------------------------------
 
 CMD:banir(playerid, params[])
 {
@@ -140,3 +146,52 @@ CMD:banir(playerid, params[])
     Kick(giveplayerid);
     return 1;
 }
+
+// -----------------------------------------------------------------------------------------
+
+CMD:desbanir(playerid, params[])
+{
+	new string[128];
+    if(PlayerData[playerid][admin] < ADMIN)
+    {
+        format(string, sizeof(string), "ERRO: Você não é um %s!", GetAdminLevelName(ADMIN));
+        return SendClientMessage(playerid, COR_VERMELHO, string);
+    }
+    else if(ModoAdmin[playerid] != true)
+        return SendClientMessage(playerid, COR_VERMELHO, "ERRO: Você não está em modo admin!");
+
+    new playerban[MAX_PLAYER_NAME];
+    if(sscanf(params, "s", playerban))
+        return SendClientMessage(playerid, COR_CINZA, "USO: /desbanir [nome]");
+
+    mysql_format(DBConn, string, sizeof(string), "SELECT Player.nome, Ban.* FROM Ban JOIN Player ON Player.id=Ban.accid AND Player.nome='%e';", playerban);
+    new Cache:cache = mysql_query(DBConn, string);
+
+    if(cache_is_valid(cache))
+    {
+        cache_set_active(cache);
+        new row;
+        if(cache_get_row_count(row))
+        {
+            if(row>0)
+            {
+                new banid;
+                cache_get_value_name_int(0, "banid", banid);
+                mysql_format(DBConn, string, sizeof(string), "DELETE FROM Ban WHERE banid=%d;", banid);
+                mysql_query(DBConn, string, false);
+                format(string, sizeof(string), "%s %s desbaniu %s", GetAdminLevelName(PlayerData[playerid][admin]), GetPlayerNameEx(playerid), playerban);
+                SendClientMessageToStaff(string);
+                cache_unset_active();
+                cache_delete(cache);
+	            return 1;
+            }
+        }
+    }
+    
+    cache_unset_active();
+    cache_delete(cache);
+    SendClientMessage(playerid, COR_VERMELHO, "ERRO: Jogador não encontrado!");
+	return 1;
+}
+
+// -----------------------------------------------------------------------------------------
