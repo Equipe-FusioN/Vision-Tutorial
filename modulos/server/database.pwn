@@ -67,7 +67,7 @@ stock CheckBanTable()
 		FOREIGN KEY (accid) REFERENCES Player(id)\
 	);", false);
 
-	mysql_query(DBConn, "ALTER TABLE Ban ADD IF NOT EXISTS ip varchar(16) NOT NULL;", false);
+	mysql_query(DBConn, "ALTER TABLE Ban ADD IF NOT EXISTS protocol varchar(25) NOT NULL;", false);
 	mysql_query(DBConn, "ALTER TABLE Ban ADD IF NOT EXISTS gpci varchar(64) NOT NULL;", false);
 	mysql_query(DBConn, "ALTER TABLE Ban ADD IF NOT EXISTS adm varchar(25) NOT NULL;", false);
 	mysql_query(DBConn, "ALTER TABLE Ban ADD IF NOT EXISTS ban int NOT NULL;", false);

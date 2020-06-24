@@ -134,8 +134,8 @@ CMD:banir(playerid, params[])
     else unbantime = bantime + (tempo*86400); // 86400 = 1 dia
 
     mysql_format(DBConn, string, sizeof(string), "INSERT INTO Ban \
-        (accid, ip, gpci, adm, ban, desban, motivo) \
-        VALUES (%d, %e, %e, %e, %d, %d, %e);",
+        (accid, protocol, gpci, adm, ban, desban, motivo) \
+        VALUES (%d, '%e', '%e', '%e', %d, %d, '%e');",
         PlayerData[giveplayerid][accid], playerip, serial, GetPlayerNameEx(playerid), bantime, unbantime, motivo);
     mysql_query(DBConn, string, false);
 
