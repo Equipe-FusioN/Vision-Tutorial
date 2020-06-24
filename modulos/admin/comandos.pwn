@@ -135,7 +135,7 @@ CMD:banir(playerid, params[])
 
     mysql_format(DBConn, string, sizeof(string), "INSERT INTO Ban \
         (accid, ip, gpci, adm, ban, desban, motivo) \
-        VALUES (%d, %e, %e, %e, %d, %d, %e);",
+        VALUES (%d, '%e', '%e', '%e', %d, %d, '%e');",
         PlayerData[giveplayerid][accid], playerip, serial, GetPlayerNameEx(playerid), bantime, unbantime, motivo);
     mysql_query(DBConn, string, false);
 
