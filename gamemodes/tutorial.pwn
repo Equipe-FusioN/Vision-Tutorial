@@ -21,6 +21,8 @@
 // MODULOS
 #include "../modulos/core/util.pwn"
 
+#include "../modulos/gui/relogio.pwn"
+
 #include "../modulos/server/database.pwn"
 #include "../modulos/server/login.pwn"
 
@@ -46,6 +48,7 @@ public OnGameModeInit()
 	SetGameModeText("FsN Tutos");
 	LoadMap("maps/favela_objects.txt");
 	DataBaseInit();
+	CreateClock();
 	return 1;
 }
 
@@ -55,5 +58,6 @@ public OnGameModeExit()
 {
 	DOF2_Exit();
 	mysql_close(DBConn);
+	DestroyClock();
 	return 1;
 }

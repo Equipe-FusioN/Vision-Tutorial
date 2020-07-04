@@ -4,6 +4,7 @@ hook OnPlayerConnect(playerid)
 {
 	RemoveBuildingFromFile(playerid, "maps/favela_buildings.txt");
 	LoadPlayerData(playerid);
+	ShowClock(playerid);
 	return 1;
 }
 
@@ -28,6 +29,7 @@ hook OnPlayerDisconnect(playerid, reason)
 	for(new PLAYER_DATA:i; i < PLAYER_DATA; i++)
 		PlayerData[playerid][i] = 0;
 
+	HideClock(playerid);
 	return 1;
 }
 
