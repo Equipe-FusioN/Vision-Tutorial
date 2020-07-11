@@ -1,0 +1,1 @@
+new Float:Fuel[MAX_VEHICLES];
