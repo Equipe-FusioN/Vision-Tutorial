@@ -37,7 +37,7 @@ sampctl package install Chainksain/Vision-Tutorial
 Include in your code and begin using the library:
 
 ```pawn
-#include <FusioN-Tutorial>
+#include <Vision-Tutorial>
 ```
 
 ## Usage
