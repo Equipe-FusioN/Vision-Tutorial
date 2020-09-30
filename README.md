@@ -1,6 +1,6 @@
 # Vision-Tutorial
 
-[![sampctl](https://img.shields.io/badge/sampctl-FusioN--Tutorial-2f2f2f.svg?style=for-the-badge)](https://github.com/Chainksain/FusioN-Tutorial)
+[![sampctl](https://img.shields.io/badge/sampctl-Vision--Tutorial-2f2f2f.svg?style=for-the-badge)](https://github.com/Chainksain/Vision-Tutorial)
 
 <!--
 Short description of your library, why it's useful, some examples, pictures or
@@ -31,7 +31,7 @@ Happy Pawning!
 Simply install to your project:
 
 ```bash
-sampctl package install Chainksain/FusioN-Tutorial
+sampctl package install Chainksain/Vision-Tutorial
 ```
 
 Include in your code and begin using the library:
