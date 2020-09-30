@@ -1,4 +1,4 @@
-# FusioN-Tutorial
+# Vision-Tutorial
 
 [![sampctl](https://img.shields.io/badge/sampctl-FusioN--Tutorial-2f2f2f.svg?style=for-the-badge)](https://github.com/Chainksain/FusioN-Tutorial)
 
